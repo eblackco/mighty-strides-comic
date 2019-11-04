@@ -1,0 +1,143 @@
+@import '../../../imports.scss';
+
+:host {
+    ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding-left: 0;
+        // margin-top: 50px;
+        li {
+            position: relative;
+            flex-basis: 332px;
+            margin-right: 15px;
+            margin-bottom: 25px;
+            background-color: $gray6;
+            opacity: 0; //pre transition
+            transition: opacity 0.5s ease;
+            padding: 20px 15px 30px;
+            @include subtleBorder;
+            @include subtleBoxShadow;
+            cursor: pointer;
+            min-height: 220px;
+
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: top right;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transition: transform 0.5s ease, background-color 0.5s ease;
+                transform: scale3d(1, 1, 1);
+                background-color: rgba(0, 0, 0, 0);
+            }
+
+            .c-bgOverlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: radial-gradient(circle, transparent 0%, #e4e2e2 68%, #e4e2e2 100%);
+                background-position: 80px -10px;
+                background-size: 125%;
+                z-index: -1;
+            }
+
+            // .c-thumbnail {
+            //     width: 250px;
+            //     height: 250px;
+            //     background-color: $gray2;
+            //     position: absolute;
+            //     top: 0;
+            //     right: 0;
+            //     z-index: -1;
+            //     img {
+            //         width: 250px;
+            //         height: 250px;
+            //     }
+
+            //     &::after {
+            //         content: "";
+            //         position: absolute;
+            //         top: 0;
+            //         left: -60px;
+            //         width: calc(100% + 60px);
+            //         height: calc(100% + 30px);
+            //         background-image: radial-gradient(circle, transparent 0%, #e4e2e2 68%, #e4e2e2 100%);
+            //         background-position: -10px -30px;
+            //         background-size: 600px;
+            //         background-repeat: no-repeat;
+            //     }
+            // }
+
+            .c-row1 {
+                display: flex;
+                // align-items: flex-end;
+                // justify-content: space-evenly;
+                align-items: flex-start;
+                position: relative;
+                height: 65px;
+
+                // .c-row1-col1 {
+                //     flex-basis: 25%;
+                //     margin-right: 15px;
+
+                    // .c-thumbnail {
+                    //     width: 140px;
+                    //     height: 140px;
+                    //     background-color: $gray2;
+                    //     position: absolute;
+                    //     top: 0;
+                    //     right: 0;
+                    // }
+                // }
+                .c-row1-col2 {
+                    flex-basis: 75%;
+
+                    .c-name {
+                        margin-bottom: 5px;
+                        color: $gray0;
+                        font-size: 120%;
+                    }
+                    .c-subtitle {
+                        color: $gray3;
+                        font-size: 95%;
+                    }
+                }
+            }
+            
+            .c-row2 {
+                width: 45%;
+                .c-description {
+                    margin-top: 15px;
+                    font-size: 85%;
+                    color: $gray0;
+                }
+            }
+
+            &:hover, &.current {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    transform: scale3d(1.1, 1.1, 1);
+                    transition: transform 0.75s ease, background-color 0.5s ease;
+                    background-color: rgba($red0, 0.25);
+                }
+            }
+        }
+
+        @for $i from 0 through 79 {
+            $transition: $i * 0.15 + 0.4;
+            li.c-#{$i} {
+                animation: fadeIn #{$transition}s ease forwards; 
+            }
+        }
+    }
+}

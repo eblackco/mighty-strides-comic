@@ -1,0 +1,24 @@
+<h1 class="pageTitle">Characters</h1>
+<ul>
+    <li *ngFor="let character of characters; let i = index" class="c-{{i}}" [ngStyle]="{backgroundImage: 'url(./assets/images/characters/' + character.thumbnail + ')'}">
+            <!-- <div class="c-thumbnail">
+                    <img src="./assets/images/characters/{{character.thumbnail}}"/>
+                </div> -->
+                <div class="c-bgOverlay"></div>
+        <div class="c-row1">
+                
+            <div class="c-row1-col2">
+                <div class="title">
+                    <div class="c-name" [innerHTML]="character.name"></div>
+                    <div class="c-subtitle" [innerHTML]="character.subtitle"></div>
+                </div>
+            </div>
+            <!-- <div class="c-row1-col1"> -->
+                    
+                <!-- </div> -->
+        </div>
+        <div class="c-row2">
+            <div class="c-description" [innerHTML]="character.description"></div>
+        </div>
+    </li>
+</ul>

@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import './imports.scss';
+
+@import url('https://fonts.googleapis.com/css?family=Cutive+Mono|Quattrocento:400,700&display=swap');
+
+html, body {
+    font-family: 'Quattrocento';
+    font-weight: 300;
+    letter-spacing: -0.2px;
+    background-color: $yellow5;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    &:hover {
+        opacity: 0.8;
+    }
+}

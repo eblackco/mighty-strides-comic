@@ -1,0 +1,85 @@
+<div class="pageContainer" [ngClass]="{'changingPage': changingPage}">
+    <!-- <p [innerHTML]="page.description"></p> -->
+    <p class="date">{{pageDate | date:'fullDate'}} <small>{{pageDate | date:'h:mm a z'}}</small></p>
+    <p class="titleNav">
+        <a (click)="openShare()">
+            <img class="titleNavShare" src="./assets/images/global/share_icon.png"/>
+        </a>
+        <span class="titleNavShareLinks" *ngIf="shareOpen">
+            <a href="#">Twitter</a>
+            <a href="#">Facebook</a>
+            <a href="#">Reddit</a>
+            <a (click)="copyThisPageToClipboard()" [ngClass]="{ 'linkCopied': linkCopied }"><span *ngIf="!linkCopied">Copy link</span><span *ngIf="linkCopied">Link copied</span></a>
+        </span>
+    </p>
+    <div id="pageViewer">
+        <img class="zoom-{{zoom}}" src="assets/images/pages/cover.png" />
+    </div>
+</div>
+
+<div class="tape">
+    <div class="tapeReel tapeReel-1" [ngClass]="{ 'play': playTape }">
+        <div class="tapeGroove groove1"></div>
+        <div class="tapeGroove groove2"></div>
+        <div class="tapeGroove groove3"></div>
+        <div class="tapeInner"></div>
+        <div class="tapeLabel"></div>
+    </div>
+    <div class="tapeReel tapeReel-2" [ngClass]="{ 'play': playTape }">
+        <div class="tapeGroove groove1"></div>
+        <div class="tapeGroove groove2"></div>
+        <div class="tapeGroove groove3"></div>
+        <div class="tapeInner"></div>
+        <div class="tapeLabel"></div>
+    </div>
+    <div class="tapeRibbon"></div>
+</div>
+
+<ul id="pageNav">
+    <li [ngClass]="{'active': this.page.id !== this.page.nodes.first}">
+        <!-- <div class="label">&#9646;&#9664;</div> -->
+        <a (click)="loadPage(this.page.nodes.first)">
+            <div class="button">&#9664;&#9664;</div>
+            <div class="label">FIRST</div>
+        </a>
+    </li>
+    <li [ngClass]="{'active': this.page.nodes.previous}">
+        <a (click)="loadPage(this.page.nodes.previous)">
+            <div class="button">&#9664;</div>
+            <div class="label">PREVIOUS</div>
+        </a>
+    </li>
+    <li class="active page-title">
+        <a [routerLink]="['/pages']">
+            <div class="button"><span>{{page.title}}</span></div>
+            <div class="latest-indicator" *ngIf="this.page.id === this.page.nodes.latest">LATEST</div>
+        </a>
+    </li>
+    <li class="zoom zoomIn" [ngClass]="{'active': this.zoom < this.zoomMax}">
+        <a (click)="zoomIn()">
+            <div>
+                <div>+</div>
+            </div>
+        </a>
+    </li>
+    <li class="zoom zoomOut" [ngClass]="{'active': this.zoom > this.zoomMin}">
+        <a (click)="zoomOut()">
+            <div>
+                <div>-</div>
+            </div>
+        </a>
+    </li>
+    <li [ngClass]="{'active': this.page.nodes.next}">
+        <a (click)="loadPage(this.page.nodes.next)">
+            <div class="button">&#9654;</div>
+            <div class="label">NEXT</div>
+        </a>
+    </li>
+    <li [ngClass]="{'active': this.page.id !== this.page.nodes.latest}">
+        <a (click)="loadPage(this.page.nodes.latest)">
+            <div class="button">&#9654;&#9654;</div>
+            <div class="label">LATEST</div>
+        </a>
+    </li>
+</ul>
+<p class="footer">&copy; 2019-2020 R.C. Black. All rights reserved.</p>

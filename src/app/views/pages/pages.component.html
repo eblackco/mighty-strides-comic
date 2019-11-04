@@ -1,0 +1,11 @@
+<h1 class="pageTitle">Pages</h1>
+<ul>
+    <li *ngFor="let page of pages; let i = index" class="pg-{{i}}">
+        <a [routerLink]="['/page',page.id]">
+            <div class="thumbnail">
+                <img src="./assets/images/pages/1_thumb.png"/>
+            </div>
+            <div class="title">{{page.title}}</div>
+        </a>
+    </li>
+</ul>

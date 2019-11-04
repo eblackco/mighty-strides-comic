@@ -1,0 +1,336 @@
+@import '../../../imports.scss';
+
+:host {
+  .changingPage {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+
+  .pageContainer {
+    position: relative;
+
+    .date {
+      margin-bottom: 2px;
+
+      small {
+        margin-left: 5px;
+        color: $gray3;
+      }
+    }
+
+    .titleNav {
+      position: absolute;
+      top: -18px;
+      right: 0;
+      font-weight: 700;
+      display: flex;
+
+      .titleNavShare {
+        width: 18px;
+        height: 18px;
+        padding: 10px;
+        margin: -10px;
+        cursor: pointer;
+      }
+
+      .titleNavShareLinks {
+        >a {
+          position: relative;
+          padding-left: 5px;
+          margin-left: 5px;
+          color: $gray2;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.75s ease;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 20px;
+            border-right: 2px solid $gray2;
+          }
+
+          &:first-child {
+            &::before {
+              display: none;
+            }
+          }
+
+          &.linkCopied {
+            color: $gray3;
+            transition: all 0.75s ease;
+          }
+        }
+
+      }
+    }
+  }
+
+
+  #pageViewer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    border-top: 2px solid $gray2;
+    padding-top: 15px;
+    padding-bottom: 0;
+
+    img {
+      // need both width and height for Safari
+      width: 100%;
+      height: 100%;
+      transition: width 0.5s ease;
+
+      &.zoom-3 {
+        width: 100%;
+        height: 100%;
+      }
+
+      &.zoom-2 {
+        width: 80%;
+        height: 80%;
+      }
+
+      &.zoom-1 {
+        width: 60%;
+        height: 60%;
+      }
+
+      &.zoom-0 {
+        width: 38.5%;
+        height: 38.5%;
+      }
+    }
+  }
+
+  #pageNav {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100vw;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    animation: slideUp 0.5s ease;
+
+    li {
+      text-align: center;
+      cursor: pointer;
+      pointer-events: none;
+      margin: 0 10px;
+      width: 100px;
+      position: relative;
+      background-color: $gray6;
+      transition: transform 0.5s ease, opacity 1s ease;
+      opacity: 0.5;
+      @include noUserSelect;
+
+      &.zoom {
+        width: 40px;
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        font-weight: 700;
+        color: $gray6;
+
+        &.zoomIn {
+          margin-right: 0;
+        }
+
+        div {
+          width: 40px;
+          height: 100%;
+          @include flexCenter;
+
+          div {
+            width: 16px;
+            height: 16px;
+            margin-top: -4px;
+            margin-left: -4px;
+            border-radius: 50%;
+            border: 2px solid $gray5;
+            position: relative;
+
+            &::after {
+              content: '';
+              position: absolute;
+              width: 0;
+              height: 12px;
+              border-right: 2px solid $gray5;
+              bottom: -8px;
+              right: -2px;
+              transform: rotate(-45deg);
+            }
+          }
+        }
+      }
+
+      .button {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 30px;
+        font-weight: 300;
+        color: $gray4;
+        z-index: 0;
+      }
+
+      .label {
+        z-index: 1;
+        @include monospace;
+        @include subtleBorder;
+        letter-spacing: 2px;
+        position: absolute;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        background-color: $gray6;
+        padding: 3px;
+        margin-top: 5px;
+        opacity: 0.25;
+      }
+
+      &.active {
+        pointer-events: initial;
+        background-color: $gray2;
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 1s ease;
+
+        .label {
+          opacity: 1;
+        }
+
+        &.page-title {
+          width: 200px;
+
+          .button {
+            font-size: 16px;
+            @include flexCenter;
+            height: 100%;
+            color: $gray1;
+            background-color: $gray4;
+            @include subtleBorder;
+          }
+
+          .latest-indicator {
+            z-index: 1;
+            @include monospace;
+            @include subtleBorder;
+            letter-spacing: 2px;
+            position: absolute;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            background-color: $gray6;
+            padding: 3px;
+            margin-top: -7px;
+            color: $gray3;
+          }
+
+
+        }
+      }
+
+      &:hover {
+        transform: scale(1.1);
+        transition: transform 1s ease;
+      }
+    }
+  }
+
+  .tape {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 0;
+      width: 100%;
+      height: 125px;
+      background: linear-gradient(to bottom, transparent 0%, $yellow5 25%, $yellow5 100%);
+    }
+
+    .tapeReel {
+      position: absolute;
+
+      width: 200px;
+      height: 200px;
+      background-color: $gray4;
+      border-radius: 50%;
+      border: 1px solid $gray2;
+      transform: rotate(1deg);
+
+      &.tapeReel-1 {
+        left: calc(50% - 560px);
+        top: -20px;
+      }
+
+      &.tapeReel-2 {
+        left: calc(50% + 360px);
+        top: -20px;
+      }
+
+      &.play {
+        animation: rotate360 1s linear;
+      }
+
+      .tapeGroove {
+        position: absolute;
+        top: 90px;
+        left: 65px;
+        width: 55px;
+        height: 25px;
+        border-radius: 10px;
+        background-color: $gray2;
+
+        &.groove1 {
+          transform: rotate(0deg);
+          top: 88px;
+          left: 136px;
+        }
+
+        &.groove2 {
+          transform: rotate(-120deg);
+          top: 35px;
+          left: 41px;
+        }
+
+        &.groove3 {
+          transform: rotate(-240deg);
+          top: 142px;
+          left: 41px;
+        }
+      }
+
+      .tapeInner {
+        position: absolute;
+        top: 75px;
+        left: 75px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid $gray2;
+        background-color: $yellow5;
+      }
+    }
+
+    .tapeRibbon {
+      position: absolute;
+      top: -10px;
+      left: calc(50% - 415px);
+      width: 830px;
+      height: 0;
+      border-bottom: 2px solid $gray2;
+    }
+  }
+
+  p.footer {
+    margin-bottom: 100px;
+    margin-left: 5px;
+  }
+}
