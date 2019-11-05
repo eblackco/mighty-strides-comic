@@ -1,13 +1,14 @@
 @import '../../../imports.scss';
 
 :host {
+
   .changingPage {
-      &.fastForward {
-        animation: changePageForward 0.5s linear forwards;
-      }
-    
+    &.fastForward {
+      animation: changePageForward 0.5s linear forwards;
+    }
+
     &.rewind {
-        animation: changePageBackward 0.5s linear forwards;
+      animation: changePageBackward 0.5s linear forwards;
     }
   }
 
@@ -74,7 +75,6 @@
     }
   }
 
-
   #pageViewer {
     width: 100%;
     display: flex;
@@ -112,7 +112,8 @@
     }
   }
 
-  #pageNav, .tape {
+  #pageNav,
+  .tape {
     animation: slideUp 0.75s ease;
   }
 
@@ -240,8 +241,6 @@
             margin-top: -7px;
             color: $gray3;
           }
-
-
         }
       }
 
@@ -258,14 +257,40 @@
     left: 0;
     width: 100%;
 
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   top: -10px;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 95px;
+    //   background: $yellow5;
+    //   z-index: -1;
+    // }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: -7px;
+        left: calc(50% - 20px);
+        width: 40px;
+        height: 40px;
+        background: $gray4;
+        border-top: 1px solid $gray3;
+        border-left: 1px solid $gray3;
+        border-right: 1px solid $gray3;
+        // z-index: -1;
+    }
+
     &::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: 0;
-      width: 100%;
-      height: 95px;
-      background: $yellow5;
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: calc(50% - 570px);
+        width: 1140px;
+        height: 95px;
+        background: $gray5;
+        border-top: 2px solid $gray3;
     }
 
     .tapeReel {
@@ -289,38 +314,33 @@
       }
 
       &.play {
-          
-
-          &.fastForward {
-            
-            &.short {
-                animation-name: rotate360;
-                animation-duration: 0.75s;
-                animation-timing-function: linear;
-              }
-    
-              &.long {
-                animation-name: rotate720;
-                animation-duration: 1.5s;
-                animation-timing-function: ease-in;
-              }
+        &.fastForward {
+          &.short {
+            animation-name: rotate360;
+            animation-duration: 0.75s;
+            animation-timing-function: linear;
           }
 
-          &.rewind {
-            &.short {
-                animation-name: rotateNegative360;
-                animation-duration: 0.75s;
-                animation-timing-function: linear;
-              }
-    
-              &.long {
-                animation-name: rotateNegative720;
-                animation-duration: 1.5s;
-                animation-timing-function: ease-in;
-              }
+          &.long {
+            animation-name: rotate720;
+            animation-duration: 1.5s;
+            animation-timing-function: ease-in;
+          }
+        }
+
+        &.rewind {
+          &.short {
+            animation-name: rotateNegative360;
+            animation-duration: 0.75s;
+            animation-timing-function: linear;
           }
 
-          
+          &.long {
+            animation-name: rotateNegative720;
+            animation-duration: 1.5s;
+            animation-timing-function: ease-in;
+          }
+        }
       }
 
       .tapeGroove {
@@ -359,7 +379,7 @@
         height: 50px;
         border-radius: 50%;
         border: 2px solid $gray2;
-        background-color: $yellow5;
+        background-color: $gray5;
       }
     }
 
@@ -369,13 +389,12 @@
       left: calc(50% - 478px);
       width: 959px;
       height: 0;
-      border-bottom: 4px solid $gray2;
+      border-bottom: 3px solid $gray2;
     }
   }
 
   p.footer {
-    margin: 15px 15px 100px;
+    margin: 15px 15px 50px;
     text-align: center;
-
   }
 }

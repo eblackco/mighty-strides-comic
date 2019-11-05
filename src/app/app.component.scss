@@ -9,13 +9,15 @@
     top: 0;
     left: 0;
     z-index: 10;
+
     background: {
-        image: url('../assets/images/global/header.png');
-        size: contain;
-        position: calc(50% - 160px) 0;
-        repeat: no-repeat;
-      }
-      box-shadow: 0 1px 3px $gray1;
+      image: url('../assets/images/global/header.png');
+      size: contain;
+      position: calc(50% - 160px) 0;
+      repeat: no-repeat;
+    }
+
+    box-shadow: 0 1px 3px $gray1;
 
     .nav-inner {
       padding-left: 15px;
@@ -59,7 +61,7 @@
         margin: 0 15px;
         background-color: $yellow4;
         padding: 20px 15px 24px;
-        
+
 
         z-index: 1;
         // text-transform: uppercase;
@@ -67,7 +69,7 @@
         transition: background-color 0.5s ease;
 
         &:not(.active) {
-            padding-bottom: 24px;
+          padding-bottom: 24px;
         }
 
         &.active {
@@ -83,8 +85,8 @@
     padding-left: 15px;
     padding-right: 15px;
     max-width: $containerWidth;
-    margin: 120px auto 0;
-    min-height: calc(100vh - 170px);
+    margin: 110px auto 0;
+    min-height: calc(100vh - 160px);
   }
 
   footer {
@@ -99,12 +101,18 @@
     }
   }
 
-  .topGrad {
-    position: fixed;
-    top: 88px;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    background: linear-gradient(to bottom, $yellow5, $yellow5 25%, transparent);
+  &.page {
+    footer {
+      background-color: transparent;
+    }
   }
+
+  //   .topGrad {
+  //     position: fixed;
+  //     top: 88px;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 20px;
+  //     background: linear-gradient(to bottom, $yellow5, $yellow5 25%, transparent);
+  //   }
 }
