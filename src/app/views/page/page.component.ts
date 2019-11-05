@@ -23,6 +23,8 @@ export class PageComponent implements OnInit {
   init: boolean = true;
   changingPage: boolean = false;
   playTape: boolean = false;
+  playTapeDirection: string = 'forward';
+  playTapeDuration: string = 'slow';
 
   shareOpen: boolean = false;
   linkCopied: boolean = false;
@@ -57,11 +59,11 @@ export class PageComponent implements OnInit {
             this.changingPage = true;
             setTimeout(() => {
               this.changingPage = false;
-            }, 500);
+            }, 550);
             this.playTape = true;
             setTimeout(() => {
               this.playTape = false;
-            }, 1100);
+            }, this.playTapeDuration === 'short' ? 800 : 1600);
           }
 
         }
@@ -82,6 +84,26 @@ export class PageComponent implements OnInit {
   loadPage(pageId: string) {
     // if (environment.production === false) { console.log('should load page', pageId); }
     this.router.navigate(['/page', pageId]);
+  }
+
+  fastForwardTape() {
+    this.playTapeDirection = 'forward';
+    return true;
+  }
+
+  rewindTape() {
+    this.playTapeDirection = 'backward';
+    return true;
+  }
+
+  setTapePlayShort() {
+    this.playTapeDuration = 'short';
+    return true;
+  }
+
+  setTapePlayLong() {
+    this.playTapeDuration = 'long';
+    return true;
   }
 
   zoomIn() {

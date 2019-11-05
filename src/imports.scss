@@ -96,6 +96,61 @@ $containerWidth: 1140px;
     }
 }
 
+@keyframes rotate720 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes rotateNegative360 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes rotateNegative720 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-720deg);
+    }
+}
+
+@keyframes changePageForward {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes changePageBackward {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .pageTitle {
     font-size: 28px;
     width: 100%;

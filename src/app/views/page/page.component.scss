@@ -2,7 +2,13 @@
 
 :host {
   .changingPage {
-    animation: fadeIn 0.5s ease-in-out forwards;
+      &.fastForward {
+        animation: changePageForward 0.5s linear forwards;
+      }
+    
+    &.rewind {
+        animation: changePageBackward 0.5s linear forwards;
+    }
   }
 
   .pageContainer {
@@ -106,6 +112,10 @@
     }
   }
 
+  #pageNav, .tape {
+    animation: slideUp 0.75s ease;
+  }
+
   #pageNav {
     position: fixed;
     bottom: 20px;
@@ -115,7 +125,6 @@
     display: flex;
     justify-content: center;
     padding-left: 0;
-    animation: slideUp 0.5s ease;
 
     li {
       text-align: center;
@@ -139,6 +148,10 @@
 
         &.zoomIn {
           margin-right: 0;
+        }
+
+        &.zoomOut {
+          margin-left: 0;
         }
 
         div {
@@ -248,11 +261,11 @@
     &::before {
       content: '';
       position: absolute;
-      top: -40px;
+      top: -10px;
       left: 0;
       width: 100%;
-      height: 125px;
-      background: linear-gradient(to bottom, transparent 0%, $yellow5 25%, $yellow5 100%);
+      height: 95px;
+      background: $yellow5;
     }
 
     .tapeReel {
@@ -262,21 +275,52 @@
       height: 200px;
       background-color: $gray4;
       border-radius: 50%;
-      border: 1px solid $gray2;
+      border: 2px solid $gray2;
       transform: rotate(1deg);
 
       &.tapeReel-1 {
-        left: calc(50% - 560px);
+        left: calc(50% - 624px);
         top: -20px;
       }
 
       &.tapeReel-2 {
-        left: calc(50% + 360px);
+        left: calc(50% + 424px);
         top: -20px;
       }
 
       &.play {
-        animation: rotate360 1s linear;
+          
+
+          &.fastForward {
+            
+            &.short {
+                animation-name: rotate360;
+                animation-duration: 0.75s;
+                animation-timing-function: linear;
+              }
+    
+              &.long {
+                animation-name: rotate720;
+                animation-duration: 1.5s;
+                animation-timing-function: ease-in;
+              }
+          }
+
+          &.rewind {
+            &.short {
+                animation-name: rotateNegative360;
+                animation-duration: 0.75s;
+                animation-timing-function: linear;
+              }
+    
+              &.long {
+                animation-name: rotateNegative720;
+                animation-duration: 1.5s;
+                animation-timing-function: ease-in;
+              }
+          }
+
+          
       }
 
       .tapeGroove {
@@ -309,12 +353,12 @@
 
       .tapeInner {
         position: absolute;
-        top: 75px;
-        left: 75px;
+        top: calc(50% - 27px);
+        left: calc(50% - 27px);
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        border: 1px solid $gray2;
+        border: 2px solid $gray2;
         background-color: $yellow5;
       }
     }
@@ -322,15 +366,16 @@
     .tapeRibbon {
       position: absolute;
       top: -10px;
-      left: calc(50% - 415px);
-      width: 830px;
+      left: calc(50% - 478px);
+      width: 959px;
       height: 0;
-      border-bottom: 2px solid $gray2;
+      border-bottom: 4px solid $gray2;
     }
   }
 
   p.footer {
-    margin-bottom: 100px;
-    margin-left: 5px;
+    margin: 15px 15px 100px;
+    text-align: center;
+
   }
 }

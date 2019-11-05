@@ -1,4 +1,4 @@
-<div class="pageContainer" [ngClass]="{'changingPage': changingPage}">
+<div class="pageContainer" [ngClass]="{'changingPage': changingPage, 'fastForward': playTapeDirection === 'forward', 'rewind': playTapeDirection === 'backward'}">
     <!-- <p [innerHTML]="page.description"></p> -->
     <p class="date">{{pageDate | date:'fullDate'}} <small>{{pageDate | date:'h:mm a z'}}</small></p>
     <p class="titleNav">
@@ -18,50 +18,53 @@
 </div>
 
 <div class="tape">
-    <div class="tapeReel tapeReel-1" [ngClass]="{ 'play': playTape }">
-        <div class="tapeGroove groove1"></div>
-        <div class="tapeGroove groove2"></div>
-        <div class="tapeGroove groove3"></div>
-        <div class="tapeInner"></div>
-        <div class="tapeLabel"></div>
-    </div>
-    <div class="tapeReel tapeReel-2" [ngClass]="{ 'play': playTape }">
-        <div class="tapeGroove groove1"></div>
-        <div class="tapeGroove groove2"></div>
-        <div class="tapeGroove groove3"></div>
-        <div class="tapeInner"></div>
-        <div class="tapeLabel"></div>
-    </div>
     <div class="tapeRibbon"></div>
+    <div class="tapeReel tapeReel-1" [ngClass]="{ 'play': playTape, 'fastForward': playTapeDirection === 'forward', 'rewind': playTapeDirection === 'backward', 'short': playTapeDuration === 'short', 'long': playTapeDuration === 'long' }">
+        <div class="tapeGroove groove1"></div>
+        <div class="tapeGroove groove2"></div>
+        <div class="tapeGroove groove3"></div>
+        <div class="tapeInner"></div>
+        <div class="tapeLabel"></div>
+    </div>
+    <div class="tapeReel tapeReel-2" [ngClass]="{ 'play': playTape, 'fastForward': playTapeDirection === 'forward', 'rewind': playTapeDirection === 'backward', 'short': playTapeDuration === 'short', 'long': playTapeDuration === 'long' }">
+        <div class="tapeGroove groove1"></div>
+        <div class="tapeGroove groove2"></div>
+        <div class="tapeGroove groove3"></div>
+        <div class="tapeInner"></div>
+        <div class="tapeLabel"></div>
+    </div>
 </div>
 
 <ul id="pageNav">
     <li [ngClass]="{'active': this.page.id !== this.page.nodes.first}">
         <!-- <div class="label">&#9646;&#9664;</div> -->
-        <a (click)="loadPage(this.page.nodes.first)">
+        <a (click)="setTapePlayLong() && rewindTape() && loadPage(this.page.nodes.first)">
             <div class="button">&#9664;&#9664;</div>
             <div class="label">FIRST</div>
         </a>
     </li>
     <li [ngClass]="{'active': this.page.nodes.previous}">
-        <a (click)="loadPage(this.page.nodes.previous)">
+        <a (click)="setTapePlayShort() && rewindTape() && loadPage(this.page.nodes.previous)">
             <div class="button">&#9664;</div>
             <div class="label">PREVIOUS</div>
         </a>
     </li>
+
+    <li class="zoom zoomIn" [ngClass]="{'active': this.zoom < this.zoomMax}">
+            <a (click)="zoomIn()">
+                <div>
+                    <div>+</div>
+                </div>
+            </a>
+        </li>
+
     <li class="active page-title">
         <a [routerLink]="['/pages']">
             <div class="button"><span>{{page.title}}</span></div>
             <div class="latest-indicator" *ngIf="this.page.id === this.page.nodes.latest">LATEST</div>
         </a>
     </li>
-    <li class="zoom zoomIn" [ngClass]="{'active': this.zoom < this.zoomMax}">
-        <a (click)="zoomIn()">
-            <div>
-                <div>+</div>
-            </div>
-        </a>
-    </li>
+    
     <li class="zoom zoomOut" [ngClass]="{'active': this.zoom > this.zoomMin}">
         <a (click)="zoomOut()">
             <div>
@@ -70,13 +73,13 @@
         </a>
     </li>
     <li [ngClass]="{'active': this.page.nodes.next}">
-        <a (click)="loadPage(this.page.nodes.next)">
+        <a (click)="setTapePlayShort() && fastForwardTape() && loadPage(this.page.nodes.next)">
             <div class="button">&#9654;</div>
             <div class="label">NEXT</div>
         </a>
     </li>
     <li [ngClass]="{'active': this.page.id !== this.page.nodes.latest}">
-        <a (click)="loadPage(this.page.nodes.latest)">
+        <a (click)="setTapePlayLong() && fastForwardTape() && loadPage(this.page.nodes.latest)">
             <div class="button">&#9654;&#9654;</div>
             <div class="label">LATEST</div>
         </a>
