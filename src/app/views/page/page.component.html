@@ -60,7 +60,7 @@
 
     <li class="active page-title">
         <a [routerLink]="['/pages']">
-            <div class="button"><span>{{page.title}}</span></div>
+            <div class="button"><span [innerHTML]="page.title"></span></div>
             <div class="latest-indicator" *ngIf="this.page.id === this.page.nodes.latest">LATEST</div>
         </a>
     </li>

@@ -1,21 +1,27 @@
 <h1 class="pageTitle">Characters</h1>
+<div class="search">
+    <div class="searchPrompt" *ngIf="selectedCharacters.length === 0">Select some characters to see the pages they're in together.</div>
+    <div class="searchButtons" *ngIf="selectedCharacters.length > 0">
+        <div class="searchButton" (click)="searchSelectedCharacters()">SEARCH</div>
+        <div class="searchButton" (click)="resetSelectedCharacters()">RESET</div>
+    </div>
+    
+</div>
+
 <ul>
-    <li *ngFor="let character of characters; let i = index" class="c-{{i}}" [ngStyle]="{backgroundImage: 'url(./assets/images/characters/' + character.thumbnail + ')'}">
-            <!-- <div class="c-thumbnail">
-                    <img src="./assets/images/characters/{{character.thumbnail}}"/>
-                </div> -->
-                <div class="c-bgOverlay"></div>
+    <li *ngFor="let character of characters; let i = index"
+        class="character c-{{i}}"
+        [ngStyle]="{backgroundImage: 'url(./assets/images/characters/' + character.thumbnail + ')'}"
+        (click)="selectCharacter($event, i)"
+    >
+        <div class="c-bgOverlay"></div>
         <div class="c-row1">
-                
             <div class="c-row1-col2">
                 <div class="title">
                     <div class="c-name" [innerHTML]="character.name"></div>
                     <div class="c-subtitle" [innerHTML]="character.subtitle"></div>
                 </div>
             </div>
-            <!-- <div class="c-row1-col1"> -->
-                    
-                <!-- </div> -->
         </div>
         <div class="c-row2">
             <div class="c-description" [innerHTML]="character.description"></div>

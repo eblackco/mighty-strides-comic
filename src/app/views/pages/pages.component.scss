@@ -7,6 +7,17 @@
         padding-top: 1px;
     }
 
+    .tags {
+        color: $gray3;
+    }
+
+    .seeAllPages {
+        @include buttonStyle;
+        max-width: 150px;
+        text-align: center;
+        margin-top: 15px;
+    }
+
     ul {
         list-style-type: none;
         display: flex;
@@ -22,6 +33,11 @@
             margin-bottom: 40px;
             opacity: 0; //pre transition
             transition: opacity 0.5s ease;
+            display: none;
+
+            &.show {
+                display: block;
+            }
 
             &::before {
                 content: '';
