@@ -1,8 +1,8 @@
 <h1 class="pageTitle">Pages <span *ngIf="hasTags">matching tags: <span class="tags">{{getTags()}}</span></span></h1>
 <div *ngIf="hasTags" class="seeAllPages" (click)="seeAllPages()">SEE ALL PAGES</div>
 <ul>
-    <li *ngFor="let page of pages; let i = index" class="page pg-{{i}}" [ngClass]="{'show': !hasTags || tagsMatch(i) }">
-        <a [routerLink]="['/page',page.id]">
+    <li *ngFor="let page of pages; let i = index" class="page pg-{{i}}" [ngClass]="{'show': !hasTags || tagsMatch(i), 'open': openIndex === i }">
+        <a (click)="gotoPage(i, page.id)">
             <div class="thumbnail">
                 <img src="./assets/images/pages/1_thumb.png"/>
             </div>

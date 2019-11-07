@@ -12,6 +12,7 @@ export class PagesComponent implements OnInit {
 
   hasTags: boolean = false;
   tags;
+  openIndex: number = -1;
 
   constructor(
     private contentService: ContentService,
@@ -51,5 +52,12 @@ export class PagesComponent implements OnInit {
 
   seeAllPages() {
     this.router.navigate(['/pages']);
+  }
+
+  gotoPage(index: number, pageId: string) {
+    this.openIndex = index;
+    setTimeout(() => {
+      this.router.navigate(['/page', pageId]);
+    }, 500);
   }
 }
