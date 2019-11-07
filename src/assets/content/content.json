@@ -1,0 +1,122 @@
+{
+    "characters": [
+        {
+            "tag": "jinx",
+            "name": "Jinx Colton",
+            "subtitle": "Tenor Saxophone<br> Jinx Colton Quartet",
+            "description": "As a veteran of ensembles led by jazz greats such as Gilly Gizesky, Dave Kilometers and Tiberius Nunc, Colton brings serious talent and focus to his debut album as composer-bandleader, <strong>Mighty Strides</strong>.",
+            "thumbnail": "jinx.png"
+        },
+        {
+            "tag": "posey",
+            "name": "Josephine (Posey) Shaw",
+            "subtitle": "Bass<br> Jinx Colton Quartet",
+            "description": "Colton&rsquo;s longtime friend used to record and tour extensively with Nunc and Kilometers before apparently washing out, but now forges ahead with renewed energy pursuing new opportunities for collaboration.",
+            "thumbnail": "posey.png"
+        },
+        {
+            "tag": "bark",
+            "name": "Art &ldquo;Bark&rdquo; Baker",
+            "subtitle": "Drums<br> Jinx Colton Quartet",
+            "description": "Hailing from Dogtown, Pennsylvania, Bark recently moved to New York City and quickly caught the attention of Dave Kilometers due to his nimble, energetic drumming, which is on full display for Colton&rsquo;s debut.",
+            "thumbnail": "bark.png"
+        },
+        {
+            "tag": "tommy",
+            "name": "Tommy Cardigan",
+            "subtitle": "Piano<br> Jinx Colton Quartet",
+            "description": "A talented but enigmatic pianist due to his propensity to favor recording gigs over live performance, Cardigan has recently focused on expanding his musical horizons to encompass ever-more complex and fast moving sonic landscapes.",
+            "thumbnail": "tommy.png"
+        }
+    ],
+    "pages": [
+        {
+            "id": "cover",
+            "title": "Cover",
+            "description": "This is the cover page!",
+            "shortDescription": "Cover page",
+            "releaseDate": "October 31, 2019 10:00:00",
+            "tags": [
+                "jinx",
+                "posey",
+                "bark",
+                "tommy"
+            ]
+        },
+        {
+            "id": "1",
+            "title": "Page 1",
+            "description": "This is where things kick off!",
+            "shortDescription": "This is where things kick off!",
+            "releaseDate": "October 31, 2019 10:00:00",
+            "tags": [
+                "jinx",
+                "posey",
+                "bark",
+                "tommy"
+            ]
+        },
+        {
+            "id": "2",
+            "title": "Page 2",
+            "description": "Second verse, same as the first.",
+            "shortDescription": "Second verse, same as the first.",
+            "releaseDate": "October 31, 2019 10:00:00",
+            "tags": [
+                "jinx",
+                "posey"
+            ]
+        },
+        {
+            "id": "3",
+            "title": "Page 3",
+            "description": "Second verse, same as the first.",
+            "shortDescription": "Second verse, same as the first.",
+            "releaseDate": "October 31, 2019 10:00:00",
+            "tags": [
+                "bark",
+                "tommy"
+            ]
+        },
+        {
+            "id": "4",
+            "title": "Page 4",
+            "description": "Second verse, same as the first.",
+            "shortDescription": "Second verse, same as the first.",
+            "releaseDate": "October 31, 2019 10:00:00",
+            "tags": [
+                "jinx"
+            ]
+        },
+        {
+            "id": "5",
+            "title": "Page 5",
+            "description": "Second verse, same as the first.",
+            "shortDescription": "Second verse, same as the first.",
+            "releaseDate": "October 31, 2019 10:00:00",
+            "tags": [
+                "posey"
+            ]
+        },
+        {
+            "id": "6",
+            "title": "Page 6",
+            "description": "Second verse, same as the first.",
+            "shortDescription": "Second verse, same as the first.",
+            "releaseDate": "October 31, 2019 10:00:00",
+            "tags": [
+                "bark"
+            ]
+        },
+        {
+            "id": "7",
+            "title": "Page 7",
+            "description": "Second verse, same as the first.",
+            "shortDescription": "Second verse, same as the first.",
+            "releaseDate": "October 31, 2019 10:00:00",
+            "tags": [
+                "tommy"
+            ]
+        }
+    ]
+}
