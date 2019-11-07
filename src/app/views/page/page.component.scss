@@ -87,6 +87,8 @@
     border-top: 2px solid $gray2;
     padding-top: 15px;
     padding-bottom: 0;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
 
     img {
       // need both width and height for Safari
