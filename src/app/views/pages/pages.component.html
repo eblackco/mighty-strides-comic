@@ -1,4 +1,4 @@
-<h1 class="pageTitle">Pages <span *ngIf="hasTags">matching tags: <span class="tags">{{getTags()}}</span></span></h1>
+<h1 class="pageTitle">Pages <span *ngIf="hasTags">matching tag<span *ngIf="tags.length > 1">s</span>: <span class="tags">{{getTagsString()}}</span></span></h1>
 <div *ngIf="hasTags" class="seeAllPages" (click)="seeAllPages()">SEE ALL PAGES</div>
 <ul>
     <li *ngFor="let page of pages; let i = index" class="page pg-{{i}}" [ngClass]="{'show': !hasTags || tagsMatch(i), 'open': openIndex === i }">

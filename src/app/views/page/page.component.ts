@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
@@ -29,6 +29,19 @@ export class PageComponent implements OnInit {
   shareOpen: boolean = false;
   linkCopied: boolean = false;
 
+  lastWindowWidth = window.innerWidth;
+  collapseWidth: number = 800;
+
+  @HostListener('window:resize')
+  onResize() {
+    if (this.lastWindowWidth < this.collapseWidth && window.innerWidth >= this.collapseWidth) {
+      this.zoom = 3;
+    }
+    if (this.lastWindowWidth >= this.collapseWidth && window.innerWidth < this.collapseWidth) {
+      this.zoom = 3;
+    }
+  }
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private contentService: ContentService,
@@ -41,7 +54,13 @@ export class PageComponent implements OnInit {
       if (params.has('id')) {
         this.id = params.get('id');
 
-        let newPage = this.contentService.getPage(this.id);
+        let newPage;
+
+        if (this.id === 'latest') {
+          this.router.navigate(['/']);
+        } else {
+          newPage = this.contentService.getPage(this.id);
+        }
 
         // go home if invalid page was passed, otherwise render the page
         if (newPage === null) {
@@ -74,7 +93,9 @@ export class PageComponent implements OnInit {
       }
     })
 
-    this.zoom = this.sessionService.getZoom() || this.zoom;
+    this.zoom = window.innerWidth < 800 ? 0 : 3;
+    this.zoomMax = window.innerWidth < 800 ? 2 : 3;
+    // this.zoom = this.sessionService.getZoom() || this.zoom;
   }
 
   ngOnDestroy() {
@@ -106,17 +127,22 @@ export class PageComponent implements OnInit {
     return true;
   }
 
+  setZoom(zoom: number) {
+    this.zoom = zoom;
+    // this.sessionService.setZoom(this.zoom);
+  }
+
   zoomIn() {
     if (this.zoom < this.zoomMax) {
       this.zoom++;
-      this.sessionService.setZoom(this.zoom);
+      // this.sessionService.setZoom(this.zoom);
     }
   }
 
   zoomOut() {
     if (this.zoom > this.zoomMin) {
       this.zoom--;
-      this.sessionService.setZoom(this.zoom);
+      // this.sessionService.setZoom(this.zoom);
     }
   }
 

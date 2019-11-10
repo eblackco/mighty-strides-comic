@@ -2,17 +2,24 @@
   <div class="nav-inner">
     <a class="nav-logo" [routerLink]="['/page']">
       <div class="nav-title">
-        Mighty Strides
+        Mighty&nbsp;Strides
       </div>
       <div class="nav-subtitle">
-        A limited webcomic
+        A&nbsp;limited&nbsp;webcomic
       </div>
     </a>
-    <div class="nav-links">
-      <a [routerLink]="['/pages']" routerLinkActive="active">Pages</a>
-      <a [routerLink]="['/characters']" routerLinkActive="active">Characters</a>
-      <a [routerLink]="['/extras']" routerLinkActive="active">Extras</a>
-      <a [routerLink]="['/about']" routerLinkActive="active">About</a>
+    <div class="nav-links" [ngClass]="{'open': mobileNavOpen }">
+      <div class="nav-links-inner">
+          <a [routerLink]="['/page/latest']">Latest Page</a>
+          <a [routerLink]="['/pages']" routerLinkActive="active">Pages</a>
+          <a [routerLink]="['/characters']" routerLinkActive="active">Characters</a>
+          <!-- <a [routerLink]="['/extras']" routerLinkActive="active">Extras</a> -->
+          <a [routerLink]="['/about']" routerLinkActive="active">About</a>
+      </div>
+      
+    </div>
+    <div class="nav-mobile-icon" [ngClass]="{'open': mobileNavOpen }" (click)="mobileNavOpen = !mobileNavOpen">
+      <div class="nav-mobile-icon-inner"></div>
     </div>
 
   </div>
@@ -22,7 +29,7 @@
 </main>
 <footer>
   <div class="footer-inner">
-    &copy; 2019-2020 R.C. Black. All rights reserved.
+    <app-footer></app-footer>
   </div>
 </footer>
 <!-- <div class="topGrad"></div> -->

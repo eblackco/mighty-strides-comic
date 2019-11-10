@@ -2,15 +2,16 @@
     <!-- <p [innerHTML]="page.description"></p> -->
     <p class="date">{{pageDate | date:'fullDate'}} <small>{{pageDate | date:'h:mm a z'}}</small></p>
     <p class="titleNav">
+            <span class="titleNavShareLinks" *ngIf="shareOpen">
+                    <a href="#">Twitter</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">Reddit</a>
+                    <a (click)="copyThisPageToClipboard()" [ngClass]="{ 'linkCopied': linkCopied }"><span *ngIf="!linkCopied">Copy link</span><span *ngIf="linkCopied">Link copied</span></a>
+                </span>
         <a (click)="openShare()">
-            <img class="titleNavShare" src="./assets/images/global/share_icon.png"/>
+            <img class="titleNavShare" [ngClass]="{ 'open': shareOpen }" src="./assets/images/global/share_icon.png"/>
         </a>
-        <span class="titleNavShareLinks" *ngIf="shareOpen">
-            <a href="#">Twitter</a>
-            <a href="#">Facebook</a>
-            <a href="#">Reddit</a>
-            <a (click)="copyThisPageToClipboard()" [ngClass]="{ 'linkCopied': linkCopied }"><span *ngIf="!linkCopied">Copy link</span><span *ngIf="linkCopied">Link copied</span></a>
-        </span>
+        
     </p>
     <div id="pageViewer">
         <img class="zoom-{{zoom}}" src="assets/images/pages/cover.png" />
@@ -85,4 +86,4 @@
         </a>
     </li>
 </ul>
-<p class="footer">&copy; 2019-2020 R.C. Black. All rights reserved.</p>
+<app-footer></app-footer>

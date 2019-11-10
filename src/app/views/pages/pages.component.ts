@@ -32,7 +32,7 @@ export class PagesComponent implements OnInit {
     })
   }
 
-  getTags() {
+  getTagsString() {
     return this.tags.toString().replace(',', ', ');
   }
 
@@ -40,13 +40,13 @@ export class PagesComponent implements OnInit {
     let match = true;
 
     for (let i = 0; i < this.tags.length; i++) {
-      console.log('evaluate', this.tags[i], 'in page', this.pages[pageIndex]);
+      // console.log('evaluate', this.tags[i], 'in page', this.pages[pageIndex]);
       if (this.pages[pageIndex].tags.indexOf(this.tags[i]) < 0) {
         match = false;
       }
     }
 
-    console.log('match', match)
+    // console.log('match', match)
     return match;
   }
 

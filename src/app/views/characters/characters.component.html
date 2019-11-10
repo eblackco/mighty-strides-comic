@@ -12,7 +12,7 @@
     <li *ngFor="let character of characters; let i = index"
         class="character c-{{i}}"
         [ngStyle]="{backgroundImage: 'url(./assets/images/characters/' + character.thumbnail + ')'}"
-        (click)="selectCharacter($event, i)"
+        (click)="selectCharacter(i)"
     >
         <div class="c-bgOverlay"></div>
         <div class="c-row1">

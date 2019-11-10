@@ -20,16 +20,22 @@ export class CharactersComponent implements OnInit {
     this.characters = this.contentService.getCharacters();
   }
 
-  selectCharacter(event, index: number) {
+  selectCharacter(index: number) {
     let tag = this.characters[index]['tag'];
     let pos = this.selectedCharacters.indexOf(tag);
 
     if (pos < 0) {
       this.selectedCharacters.push(tag);
-      event.target.classList.add('active');
+      let c = document.getElementsByClassName('c-' + index);
+      for (let i = 0; i < c.length; i++) {
+        c[i].classList.add('active');
+      }
     } else {
       this.selectedCharacters.splice(pos);
-      event.target.classList.remove('active');
+      let c = document.getElementsByClassName('c-' + index);
+      for (let i = 0; i < c.length; i++) {
+        c[i].classList.remove('active');
+      }
     }
 
     // console.log('selected characters', this.selectedCharacters);

@@ -11,6 +11,7 @@ import { AboutComponent } from './views/about/about.component';
 import { ExtrasComponent } from './views/extras/extras.component';
 import { StartupService } from './services/startup.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './partials/footer/footer.component';
 
 export function startupServiceFactory(startupService: StartupService): Function {
   return () => startupService.loadContent();
@@ -24,7 +25,8 @@ export function startupServiceFactory(startupService: StartupService): Function 
     PageComponent,
     CharactersComponent,
     AboutComponent,
-    ExtrasComponent
+    ExtrasComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

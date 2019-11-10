@@ -10,6 +10,8 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent {
   hostClass;
 
+  mobileNavOpen: boolean = false;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -24,6 +26,8 @@ export class AppComponent {
       if (route[route.length - 2] === 'page') {
         this.hostClass = 'page page-' + this.hostClass;
       }
+
+      this.mobileNavOpen = false;
     });
   }
 }

@@ -1,406 +1,574 @@
 @import '../../../imports.scss';
 
 :host {
+    @mixin viewCollapse {
+        @media only screen and (max-width: 599.98px) {
+            @content;
+        }
+    }
+    @mixin navCollapse {
+        @media only screen and (max-width: 599.98px) {
+            @content;
+        }
+    }
+
+    @mixin tapeCollapse {
+        @media only screen and (max-width: 1049.98px) {
+            @content;
+        }
+    }
+
 
     * {
         @include noUserSelect;
     }
 
-  .changingPage {
-    &.fastForward {
-      animation: changePageForward 0.5s linear forwards;
-    }
-
-    &.rewind {
-      animation: changePageBackward 0.5s linear forwards;
-    }
-  }
-
-  .pageContainer {
-    position: relative;
-
-    .date {
-      margin-bottom: 2px;
-
-      small {
-        margin-left: 5px;
-        color: $gray3;
-      }
-    }
-
-    .titleNav {
-      position: absolute;
-      top: -18px;
-      right: 0;
-      font-weight: 700;
-      display: flex;
-
-      .titleNavShare {
-        width: 18px;
-        height: 18px;
-        padding: 10px;
-        margin: -10px;
-        cursor: pointer;
-      }
-
-      .titleNavShareLinks {
-        >a {
-          position: relative;
-          padding-left: 5px;
-          margin-left: 5px;
-          color: $gray2;
-          font-weight: 700;
-          cursor: pointer;
-          transition: all 0.75s ease;
-
-          &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 20px;
-            border-right: 2px solid $gray2;
-          }
-
-          &:first-child {
-            &::before {
-              display: none;
-            }
-          }
-
-          &.linkCopied {
-            color: $gray3;
-            transition: all 0.75s ease;
-          }
-        }
-
-      }
-    }
-  }
-
-  #pageViewer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    border-top: 2px solid $gray2;
-    padding-top: 15px;
-    padding-bottom: 0;
-    opacity: 0;
-    animation: fadeIn 0.5s ease-in forwards;
-
-    img {
-      // need both width and height for Safari
-      width: 100%;
-      height: 100%;
-      transition: width 0.5s ease;
-
-      &.zoom-3 {
-        width: 100%;
-        height: 100%;
-      }
-
-      &.zoom-2 {
-        width: 80%;
-        height: 80%;
-      }
-
-      &.zoom-1 {
-        width: 60%;
-        height: 60%;
-      }
-
-      &.zoom-0 {
-        width: 38.5%;
-        height: 38.5%;
-      }
-    }
-  }
-
-  #pageNav,
-  .tape {
-    animation: slideUp 0.75s ease;
-  }
-
-  #pageNav {
-    position: fixed;
-    bottom: 20px;
-    left: 0;
-    width: 100vw;
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    padding-left: 0;
-
-    li {
-      text-align: center;
-      cursor: pointer;
-      pointer-events: none;
-      margin: 0 10px;
-      width: 100px;
-      position: relative;
-      background-color: $gray6;
-      transition: transform 0.5s ease, opacity 1s ease;
-      opacity: 0.5;
-      @include noUserSelect;
-
-      &.zoom {
-        width: 40px;
-        display: flex;
-        align-items: center;
-        font-size: 22px;
-        font-weight: 700;
-        color: $gray6;
-
-        &.zoomIn {
-          margin-right: 0;
-        }
-
-        &.zoomOut {
-          margin-left: 0;
-        }
-
-        div {
-          width: 40px;
-          height: 100%;
-          @include flexCenter;
-
-          div {
-            width: 16px;
-            height: 16px;
-            margin-top: -4px;
-            margin-left: -4px;
-            border-radius: 50%;
-            border: 2px solid $gray5;
-            position: relative;
-
-            &::after {
-              content: '';
-              position: absolute;
-              width: 0;
-              height: 12px;
-              border-right: 2px solid $gray5;
-              bottom: -8px;
-              right: -2px;
-              transform: rotate(-45deg);
-            }
-          }
-        }
-      }
-
-      .button {
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 30px;
-        font-weight: 300;
-        color: $gray4;
-        z-index: 0;
-      }
-
-      .label {
-        z-index: 1;
-        @include monospace;
-        @include subtleBorder;
-        letter-spacing: 2px;
-        position: absolute;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        background-color: $gray6;
-        padding: 3px;
-        margin-top: 5px;
-        opacity: 0.25;
-      }
-
-      &.active {
-        pointer-events: initial;
-        background-color: $gray2;
-        visibility: visible;
-        opacity: 1;
-        transition: opacity 1s ease;
-
-        .label {
-          opacity: 1;
-        }
-
-        &.page-title {
-          width: 200px;
-
-          .button {
-            font-size: 16px;
-            @include flexCenter;
-            height: 100%;
-            color: $gray1;
-            background-color: $gray4;
-            @include subtleBorder;
-          }
-
-          .latest-indicator {
-            z-index: 1;
-            @include monospace;
-            @include subtleBorder;
-            letter-spacing: 2px;
-            position: absolute;
-            margin-left: 50%;
-            transform: translateX(-50%);
-            background-color: $gray6;
-            padding: 3px;
-            margin-top: -7px;
-            color: $gray3;
-          }
-        }
-      }
-
-      &:hover {
-        transform: scale(1.1);
-        transition: transform 1s ease;
-      }
-    }
-  }
-
-  .tape {
-    position: fixed;
-    bottom: 80px;
-    left: 0;
-    width: 100%;
-
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   top: -10px;
-    //   left: 0;
-    //   width: 100%;
-    //   height: 95px;
-    //   background: $yellow5;
-    //   z-index: -1;
-    // }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: -7px;
-        left: calc(50% - 20px);
-        width: 40px;
-        height: 40px;
-        background: $gray4;
-        border-top: 1px solid $gray3;
-        border-left: 1px solid $gray3;
-        border-right: 1px solid $gray3;
-        // z-index: -1;
-    }
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: -6px;
-        left: calc(50% - 570px);
-        width: 1140px;
-        height: 95px;
-        background: $gray5;
-        border-top: 2px solid $gray3;
-    }
-
-    .tapeReel {
-      position: absolute;
-
-      width: 200px;
-      height: 200px;
-      background-color: $gray4;
-      border-radius: 50%;
-      border: 2px solid $gray2;
-      transform: rotate(1deg);
-
-      &.tapeReel-1 {
-        left: calc(50% - 624px);
-        top: -20px;
-      }
-
-      &.tapeReel-2 {
-        left: calc(50% + 424px);
-        top: -20px;
-      }
-
-      &.play {
+    .changingPage {
         &.fastForward {
-          &.short {
-            animation-name: rotate360;
-            animation-duration: 0.75s;
-            animation-timing-function: linear;
-          }
-
-          &.long {
-            animation-name: rotate720;
-            animation-duration: 1.5s;
-            animation-timing-function: ease-in;
-          }
+            -webkit-animation: changePageForward 0.5s linear forwards;
+            animation: changePageForward 0.5s linear forwards;
         }
 
         &.rewind {
-          &.short {
-            animation-name: rotateNegative360;
-            animation-duration: 0.75s;
-            animation-timing-function: linear;
-          }
-
-          &.long {
-            animation-name: rotateNegative720;
-            animation-duration: 1.5s;
-            animation-timing-function: ease-in;
-          }
+            -webkit-animation: changePageBackward 0.5s linear forwards;
+            animation: changePageBackward 0.5s linear forwards;
         }
-      }
-
-      .tapeGroove {
-        position: absolute;
-        top: 90px;
-        left: 65px;
-        width: 55px;
-        height: 25px;
-        border-radius: 10px;
-        background-color: $gray2;
-
-        &.groove1 {
-          transform: rotate(0deg);
-          top: 88px;
-          left: 136px;
-        }
-
-        &.groove2 {
-          transform: rotate(-120deg);
-          top: 35px;
-          left: 41px;
-        }
-
-        &.groove3 {
-          transform: rotate(-240deg);
-          top: 142px;
-          left: 41px;
-        }
-      }
-
-      .tapeInner {
-        position: absolute;
-        top: calc(50% - 27px);
-        left: calc(50% - 27px);
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 2px solid $gray2;
-        background-color: $gray5;
-      }
     }
 
-    .tapeRibbon {
-      position: absolute;
-      top: -10px;
-      left: calc(50% - 478px);
-      width: 959px;
-      height: 0;
-      border-bottom: 3px solid $gray2;
-    }
-  }
+    .pageContainer {
+        position: relative;
 
-  p.footer {
-    margin: 15px 15px 50px;
-    text-align: center;
-  }
+        .date {
+            margin-bottom: 2px;
+            padding-right: 25px;
+
+            small {
+                margin-left: 5px;
+                color: $gray3;
+                white-space: nowrap;
+            }
+        }
+
+        .titleNav {
+            position: absolute;
+            top: -18px;
+            right: 0;
+            font-weight: 700;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+
+            .titleNavShare {
+                width: 18px;
+                height: 18px;
+                padding: 10px;
+                margin: -10px;
+                cursor: pointer;
+
+                &.open {
+                    z-index: 2;
+                }
+            }
+
+            .titleNavShareLinks {
+                >a {
+                    position: relative;
+                    padding-left: 5px;
+                    margin-left: 5px;
+                    color: $gray2;
+                    font-weight: 700;
+                    cursor: pointer;
+                    -webkit-transition: all 0.75s ease;
+                    transition: all 0.75s ease;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 0;
+                        height: 20px;
+                        border-right: 2px solid $gray2;
+                    }
+
+                    &:first-child {
+                        &::before {
+                            display: none;
+                        }
+                    }
+
+                    &.linkCopied {
+                        color: $gray3;
+                        -webkit-transition: all 0.75s ease;
+                        transition: all 0.75s ease;
+                    }
+                }
+
+                @media only screen and (max-width: 1000px) {
+                    z-index: 1;
+                    position: relative;
+                    background-color: $gray6;
+                    padding: 5px;
+                    top: 24px;
+                    right: -33px;
+
+                    >a {
+                        display: block;
+                        margin: 7px;
+
+                        &::before {
+                            content: none;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    #pageViewer {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+
+        border-top: 2px solid $gray2;
+        padding-top: 15px;
+        padding-bottom: 0;
+        opacity: 0;
+        -webkit-animation: fadeIn 0.5s ease-in forwards;
+        animation: fadeIn 0.5s ease-in forwards;
+
+        @include viewCollapse {
+            width: 100vw;
+            overflow-x: scroll;
+            margin-left: -15px;
+        }
+
+        img {
+            // need both width and height for Safari
+            width: 100%;
+            height: 100%;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            margin-left: 0;
+
+            &.zoom-3 {
+                width: 100%;
+                height: 100%;
+
+                @include viewCollapse {
+                    width: 300%;
+                    height: 300%;
+                    margin-left: 140.5vw;
+                }
+            }
+
+            &.zoom-2 {
+                width: 80%;
+                height: 80%;
+
+                @include viewCollapse {
+                    width: 200%;
+                    height: 200%;
+                    margin-left: 100vw;
+                }
+            }
+
+            &.zoom-1 {
+                width: 60%;
+                height: 60%;
+
+                @include viewCollapse {
+                    width: 150%;
+                    height: 150%;
+                    margin-left: 50vw;
+                }
+            }
+
+            &.zoom-0 {
+                width: 38.5%;
+                height: 38.5%;
+
+                @include viewCollapse {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    #pageNav,
+    .tape {
+        -webkit-animation: slideUp 0.75s ease;
+        animation: slideUp 0.75s ease;
+    }
+
+    #pageNav {
+        position: fixed;
+        bottom: 20px;
+        left: 0;
+        width: 100vw;
+        list-style-type: none;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        padding-left: 0;
+
+        li {
+            text-align: center;
+            cursor: pointer;
+            pointer-events: none;
+            margin: 0 10px;
+            width: 100px;
+            position: relative;
+            background-color: $gray6;
+            -webkit-transition: opacity 1s ease, -webkit-transform 0.5s ease;
+            transition: opacity 1s ease, -webkit-transform 0.5s ease;
+            transition: transform 0.5s ease, opacity 1s ease;
+            transition: transform 0.5s ease, opacity 1s ease, -webkit-transform 0.5s ease;
+            opacity: 0.5;
+            @include noUserSelect;
+
+            @include navCollapse {
+                width: 50px;
+            }
+
+            &.zoom {
+                width: 40px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                font-size: 22px;
+                font-weight: 700;
+                color: $gray6;
+
+                &.zoomIn {
+                    margin-right: 0;
+
+                    @include navCollapse {
+                        margin-right: 2.5px;
+                    }
+                }
+
+                &.zoomOut {
+                    margin-left: 0;
+
+                    @include navCollapse {
+                        margin-left: 2.55px;
+                    }
+                }
+
+                div {
+                    width: 40px;
+                    height: 100%;
+                    @include flexCenter;
+
+                    div {
+                        width: 16px;
+                        height: 16px;
+                        margin-top: -4px;
+                        margin-left: -4px;
+                        border-radius: 50%;
+                        border: 2px solid $gray5;
+                        position: relative;
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            width: 0;
+                            height: 12px;
+                            border-right: 2px solid $gray5;
+                            bottom: -8px;
+                            right: -2px;
+                            -webkit-transform: rotate(-45deg);
+                            transform: rotate(-45deg);
+                        }
+                    }
+                }
+            }
+
+            .button {
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 30px;
+                font-weight: 300;
+                color: $gray4;
+                z-index: 0;
+
+                @include navCollapse {
+                    font-size: 20px;
+                }
+            }
+
+            .label {
+                z-index: 1;
+                @include monospace;
+                @include subtleBorder;
+                letter-spacing: 2px;
+                position: absolute;
+                margin-left: 50%;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+                background-color: $gray6;
+                padding: 3px;
+                margin-top: 5px;
+                opacity: 0.25;
+
+                @include navCollapse {
+                    font-size: 9px;
+                }
+            }
+
+            &.active {
+                pointer-events: initial;
+                background-color: $gray2;
+                visibility: visible;
+                opacity: 1;
+                -webkit-transition: opacity 1s ease;
+                transition: opacity 1s ease;
+
+                .label {
+                    opacity: 1;
+                }
+
+                &.page-title {
+                    width: 200px;
+
+                    @include navCollapse {
+                        position: absolute;
+                        top: 27px;
+                        margin-left: 0;
+                        width: 80px;
+                    }
+
+                    .button {
+                        font-size: 16px;
+                        @include flexCenter;
+                        height: 100%;
+                        color: $gray1;
+                        background-color: $gray4;
+                        @include subtleBorder;
+
+                        @include navCollapse {
+                            font-size: 12px;
+                            padding: 7px 0;
+                        }
+                    }
+
+                    .latest-indicator {
+                        z-index: 1;
+                        @include monospace;
+                        @include subtleBorder;
+                        letter-spacing: 2px;
+                        position: absolute;
+                        margin-left: 50%;
+                        -webkit-transform: translateX(-50%);
+                        transform: translateX(-50%);
+                        background-color: $gray6;
+                        padding: 3px;
+                        margin-top: -7px;
+                        color: $gray3;
+
+                        @include navCollapse {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            &:hover {
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+                -webkit-transition: -webkit-transform 1s ease;
+                transition: -webkit-transform 1s ease;
+                transition: transform 1s ease;
+                transition: transform 1s ease, -webkit-transform 1s ease;
+            }
+        }
+    }
+
+    .tape {
+        position: fixed;
+        bottom: 80px;
+        left: 0;
+        width: 100%;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: calc(50% - 570px);
+            width: 1140px;
+            height: 95px;
+            background: $gray5;
+            border-top: 2px solid $gray3;
+
+            @include navCollapse {
+                top: 10px;
+            }
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: -7px;
+            left: calc(50% - 20px);
+            width: 40px;
+            height: 40px;
+            background: $gray4;
+            border-top: 1px solid $gray3;
+            border-left: 1px solid $gray3;
+            border-right: 1px solid $gray3;
+
+            @include tapeCollapse {
+                display: none;
+            }
+        }
+
+        .tapeReel {
+            position: absolute;
+
+            width: 200px;
+            height: 200px;
+            background-color: $gray4;
+            border-radius: 50%;
+            border: 2px solid $gray2;
+            -webkit-transform: rotate(1deg);
+            transform: rotate(1deg);
+
+            &.tapeReel-1 {
+                left: calc(50% - 624px);
+                top: -20px;
+
+                @include tapeCollapse {
+                    left: 0;
+                    top: 12px;
+                    opacity: 0.33;
+                }
+            }
+
+            &.tapeReel-2 {
+                left: calc(50% + 424px);
+                top: -20px;
+
+                @include tapeCollapse {
+                    left: unset;
+                    right: 0;
+                    top: 12px;
+                    opacity: 0.33;
+                }
+            }
+
+            &.play {
+                &.fastForward {
+                    &.short {
+                        -webkit-animation-name: rotate360;
+                        animation-name: rotate360;
+                        -webkit-animation-duration: 0.75s;
+                        animation-duration: 0.75s;
+                        -webkit-animation-timing-function: linear;
+                        animation-timing-function: linear;
+                    }
+
+                    &.long {
+                        -webkit-animation-name: rotate720;
+                        animation-name: rotate720;
+                        -webkit-animation-duration: 1.5s;
+                        animation-duration: 1.5s;
+                        -webkit-animation-timing-function: ease-in;
+                        animation-timing-function: ease-in;
+                    }
+                }
+
+                &.rewind {
+                    &.short {
+                        -webkit-animation-name: rotateNegative360;
+                        animation-name: rotateNegative360;
+                        -webkit-animation-duration: 0.75s;
+                        animation-duration: 0.75s;
+                        -webkit-animation-timing-function: linear;
+                        animation-timing-function: linear;
+                    }
+
+                    &.long {
+                        -webkit-animation-name: rotateNegative720;
+                        animation-name: rotateNegative720;
+                        -webkit-animation-duration: 1.5s;
+                        animation-duration: 1.5s;
+                        -webkit-animation-timing-function: ease-in;
+                        animation-timing-function: ease-in;
+                    }
+                }
+            }
+
+            .tapeGroove {
+                position: absolute;
+                top: 90px;
+                left: 65px;
+                width: 55px;
+                height: 25px;
+                border-radius: 10px;
+                background-color: $gray2;
+
+                &.groove1 {
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                    top: 88px;
+                    left: 136px;
+                }
+
+                &.groove2 {
+                    -webkit-transform: rotate(-120deg);
+                    transform: rotate(-120deg);
+                    top: 35px;
+                    left: 41px;
+                }
+
+                &.groove3 {
+                    -webkit-transform: rotate(-240deg);
+                    transform: rotate(-240deg);
+                    top: 142px;
+                    left: 41px;
+                }
+            }
+
+            .tapeInner {
+                position: absolute;
+                top: calc(50% - 27px);
+                left: calc(50% - 27px);
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: 2px solid $gray2;
+                background-color: $gray5;
+            }
+        }
+
+        .tapeRibbon {
+            position: absolute;
+            top: -10px;
+            left: calc(50% - 478px);
+            width: 959px;
+            height: 0;
+            border-bottom: 3px solid $gray2;
+
+            @include tapeCollapse {
+                display: none;
+            }
+        }
+    }
+
+    app-footer {
+        margin: 15px 15px 50px;
+        text-align: center;
+    }
 }
