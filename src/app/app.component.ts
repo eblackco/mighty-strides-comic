@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,12 @@ export class AppComponent {
 
   mobileNavOpen: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private angulartics: Angulartics2GoogleGlobalSiteTag
+  ) {
+    angulartics.startTracking();
+  }
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {
