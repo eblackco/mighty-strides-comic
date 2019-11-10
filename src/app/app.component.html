@@ -10,7 +10,7 @@
     </a>
     <div class="nav-links" [ngClass]="{'open': mobileNavOpen }">
       <div class="nav-links-inner">
-          <a [routerLink]="['/page/latest']">Latest Page</a>
+          <a [routerLink]="['/page/latest']" *ngIf="mobileNavOpen">Latest Page</a>
           <a [routerLink]="['/pages']" routerLinkActive="active">Pages</a>
           <a [routerLink]="['/characters']" routerLinkActive="active">Characters</a>
           <!-- <a [routerLink]="['/extras']" routerLinkActive="active">Extras</a> -->
