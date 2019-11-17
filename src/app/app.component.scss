@@ -160,6 +160,7 @@
                     @include monospace;
                     margin-right: 15px;
                     color: $gray2;
+                    position: relative;
 
                     &.active {
                         @include noUserSelect;
@@ -168,6 +169,7 @@
                             position: relative;
                             top: 3px;
                             left: -6px;
+                            font-family: Arial, Helvetica, sans-serif;
                         }
                     }
                 }
